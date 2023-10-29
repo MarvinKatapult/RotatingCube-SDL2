@@ -34,10 +34,10 @@ int main() {
 		{ length, -length, 0 },
 		{ -length, length, 0 },
 		{ length, length, 0 },
-		{ -length, -length, length },
-		{ length, -length, length },
-		{ -length, length, length },
-		{ length, length, length }
+		{ -length, -length, length * 2 },
+		{ length, -length, length * 2 },
+		{ -length, length, length * 2 },
+		{ length, length, length * 2 }
 	};
 
 	MMatrix m_projection( projection, 2, 3 );
@@ -84,9 +84,11 @@ int main() {
 			
 			MMatrix m_point( points[i], 3, 1 );
 
-			MMatrix * rotated = m_rotation_z.mult( &m_point );
-			rotated = m_rotation_x.mult( rotated );
+			// Rotation
+			MMatrix * rotated;
+			rotated = m_rotation_x.mult( &m_point );
 			rotated = m_rotation_y.mult( rotated );
+			rotated = m_rotation_z.mult( rotated );
 
 			MMatrix * projected = m_projection.mult( rotated );
 
@@ -98,7 +100,21 @@ int main() {
 
 		}
 
-		SDL_RenderDrawPoints( renderer, points_array, 8 );
+		// Drawing Lines ( like every healthy person does )
+		SDL_RenderDrawLine( renderer, points_array[0].x, points_array[0].y, points_array[1].x, points_array[1].y );
+		SDL_RenderDrawLine( renderer, points_array[0].x, points_array[0].y, points_array[2].x, points_array[2].y );
+		SDL_RenderDrawLine( renderer, points_array[2].x, points_array[2].y, points_array[3].x, points_array[3].y );
+		SDL_RenderDrawLine( renderer, points_array[1].x, points_array[1].y, points_array[3].x, points_array[3].y );
+
+		SDL_RenderDrawLine( renderer, points_array[4].x, points_array[4].y, points_array[5].x, points_array[5].y );
+		SDL_RenderDrawLine( renderer, points_array[4].x, points_array[4].y, points_array[6].x, points_array[6].y );
+		SDL_RenderDrawLine( renderer, points_array[6].x, points_array[6].y, points_array[7].x, points_array[7].y );
+		SDL_RenderDrawLine( renderer, points_array[5].x, points_array[5].y, points_array[7].x, points_array[7].y );
+
+		SDL_RenderDrawLine( renderer, points_array[0].x, points_array[0].y, points_array[4].x, points_array[4].y );
+		SDL_RenderDrawLine( renderer, points_array[1].x, points_array[1].y, points_array[5].x, points_array[5].y );
+		SDL_RenderDrawLine( renderer, points_array[2].x, points_array[2].y, points_array[6].x, points_array[6].y );
+		SDL_RenderDrawLine( renderer, points_array[3].x, points_array[3].y, points_array[7].x, points_array[7].y );
 
 		angle += 0.01;
 
