@@ -6,6 +6,21 @@
 
 #define SCALEFACTOR 5
 
+void printMatrix( MMatrix * p_matrix ) {
+
+    printf( "Matrix %p:\n", p_matrix );
+
+    for ( int i = 0; i < p_matrix->countFields(); i++ ) {
+        printf( "%f, ", p_matrix->getValue( i ) );
+
+        // Line break for new row
+        if ( (i + 1) % p_matrix->countCols() == 0 ) printf( "\n" ); 
+    }
+
+    printf( "\n" );
+
+}
+
 int main() {
 	
 	SDL_Window * window = 0L;
@@ -29,15 +44,16 @@ int main() {
 	};
 
 	float length = 500;
+
 	float points[8][3] = {
-		{ -length, -length, 0 },
-		{ length, -length, 0 },
-		{ -length, length, 0 },
-		{ length, length, 0 },
-		{ -length, -length, length * 2 },
-		{ length, -length, length * 2 },
-		{ -length, length, length * 2 },
-		{ length, length, length * 2 }
+		{ -length, -length, -length },
+		{ length, -length, -length },
+		{ -length, length, -length },
+		{ length, length, -length },
+		{ -length, -length, length },
+		{ length, -length, length },
+		{ -length, length, length },
+		{ length, length, length }
 	};
 
 	MMatrix m_projection( projection, 2, 3 );
@@ -82,18 +98,21 @@ int main() {
 		// Apply rotation and projection matrix
 		for ( int i = 0; i < 8; i++ ) {
 			
+            // Wie kann ich das auf eigeen Matrix anwenden
 			MMatrix m_point( points[i], 3, 1 );
 
 			// Rotation
-			MMatrix * rotated;
-			rotated = m_rotation_x.mult( &m_point );
-			rotated = m_rotation_y.mult( rotated );
-			rotated = m_rotation_z.mult( rotated );
+			MMatrix rotated = m_rotation_y.mult( &m_point );
+			// rotated = m_rotation_x.mult( &rotated );
+			// rotated = m_rotation_z.mult( &rotated );
 
-			MMatrix * projected = m_projection.mult( rotated );
+            // printMatrix( &m_rotation_x );
+            printMatrix( &rotated );
 
-			float x = projected->getValue( 0, 0 ) * 0.2 + WIDTH / 2;
-			float y = projected->getValue( 0, 1 ) * 0.2 + HEIGHT / 2;
+		    MMatrix projected = m_projection.mult( &rotated );
+
+			float x = projected.getValue( 0, 0 ) * 0.2 + WIDTH / 2;
+			float y = projected.getValue( 0, 1 ) * 0.2 + HEIGHT / 2;
 
 			SDL_Point point = { (int)x, (int)y };
 			points_array[i] = point;
@@ -116,6 +135,8 @@ int main() {
 		SDL_RenderDrawLine( renderer, points_array[5].x, points_array[5].y, points_array[7].x, points_array[7].y );
 
 		angle += 0.01;
+
+        printf( "angle = %f\n", angle );
 
 		SDL_RenderPresent( renderer );
 

@@ -5,11 +5,10 @@
 TEMPLATE = app
 INCLUDEPATH += ./include/ /home/ibma/dev/MLib/include/
 LIBS += -L/usr/local/lib -lSDL2 
-LIBS += /home/ibma/dev/MLib/lib/mlib.a
 
 # Input
-SOURCES += ./src/main.cpp ../../MLib/src/mmatrix.cpp ../../MLib/src/mlist.cpp 
-HEADERS += ../../MLib/include/mmatrix.hpp ../../MLib/include/mlist.hpp 
+SOURCES += ./src/main.cpp ../MLib/src/mmatrix.cpp  
+HEADERS += ../MLib/include/mmatrix.hpp  
 
 # Output
 TARGET = rotating-cube
