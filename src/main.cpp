@@ -101,6 +101,10 @@ int main() {
 		}
 
 		// Drawing Lines ( like every healthy person does )
+		for ( int i = 0; i < 4; i++ ) {
+			SDL_RenderDrawLine( renderer, points_array[i].x, points_array[i].y, points_array[i + 4].x, points_array[i + 4].y );
+		}
+
 		SDL_RenderDrawLine( renderer, points_array[0].x, points_array[0].y, points_array[1].x, points_array[1].y );
 		SDL_RenderDrawLine( renderer, points_array[0].x, points_array[0].y, points_array[2].x, points_array[2].y );
 		SDL_RenderDrawLine( renderer, points_array[2].x, points_array[2].y, points_array[3].x, points_array[3].y );
@@ -110,11 +114,6 @@ int main() {
 		SDL_RenderDrawLine( renderer, points_array[4].x, points_array[4].y, points_array[6].x, points_array[6].y );
 		SDL_RenderDrawLine( renderer, points_array[6].x, points_array[6].y, points_array[7].x, points_array[7].y );
 		SDL_RenderDrawLine( renderer, points_array[5].x, points_array[5].y, points_array[7].x, points_array[7].y );
-
-		SDL_RenderDrawLine( renderer, points_array[0].x, points_array[0].y, points_array[4].x, points_array[4].y );
-		SDL_RenderDrawLine( renderer, points_array[1].x, points_array[1].y, points_array[5].x, points_array[5].y );
-		SDL_RenderDrawLine( renderer, points_array[2].x, points_array[2].y, points_array[6].x, points_array[6].y );
-		SDL_RenderDrawLine( renderer, points_array[3].x, points_array[3].y, points_array[7].x, points_array[7].y );
 
 		angle += 0.01;
 
