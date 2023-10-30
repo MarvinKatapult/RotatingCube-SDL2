@@ -38,12 +38,7 @@ int main() {
 	// Declaration of rotation and projection matrices
 	float angle = 0;	
 
-	float projection[6] = {
-		1, 0, 0,
-		0, 1, 0
-	};
-
-	float length = 500;
+	float length = 0.5;
 
 	float points[8][3] = {
 		{ -length, -length, -length },
@@ -56,7 +51,6 @@ int main() {
 		{ length, length, length }
 	};
 
-	MMatrix m_projection( projection, 2, 3 );
 
 	while ( running == true ) {
 
@@ -98,18 +92,30 @@ int main() {
 		// Apply rotation and projection matrix
 		for ( int i = 0; i < 8; i++ ) {
 			
-            // Wie kann ich das auf eigeen Matrix anwenden
 			MMatrix m_point( points[i], 3, 1 );
 
 			// Rotation
-			MMatrix rotated = m_rotation_y.mult( &m_point );
-			// rotated = m_rotation_x.mult( &rotated );
-			// rotated = m_rotation_z.mult( &rotated );
+			MMatrix rotatedX = m_rotation_x.mult( &m_point );
+			MMatrix rotatedY = m_rotation_y.mult( &rotatedX );
+			MMatrix rotatedZ = m_rotation_z.mult( &rotatedY );
 
-            // printMatrix( &m_rotation_x );
-            printMatrix( &rotated );
+            // Projection
+            float distance = 1.5;
+            float z = 1 / (distance - rotatedZ.getValue( 2 ) );
 
-		    MMatrix projected = m_projection.mult( &rotated );
+            // z = 1 for ortogonal projection
+
+            float projection[6] = {
+                z, 0, 0,
+                0, z, 0
+            };
+
+            MMatrix m_projection( projection, 2, 3 );
+
+		    MMatrix projected = m_projection.mult( &rotatedZ );
+
+            // Scale point up
+            projected.mult( 500 );
 
 			float x = projected.getValue( 0, 0 ) * 0.2 + WIDTH / 2;
 			float y = projected.getValue( 0, 1 ) * 0.2 + HEIGHT / 2;

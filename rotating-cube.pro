@@ -7,8 +7,8 @@ INCLUDEPATH += ./include/ /home/ibma/dev/MLib/include/
 LIBS += -L/usr/local/lib -lSDL2 
 
 # Input
-SOURCES += ./src/main.cpp ../MLib/src/mmatrix.cpp  
-HEADERS += ../MLib/include/mmatrix.hpp  
+SOURCES += ./src/main.cpp ./src/mmatrix.cpp  
+HEADERS += ./include/mmatrix.hpp  
 
 # Output
 TARGET = rotating-cube

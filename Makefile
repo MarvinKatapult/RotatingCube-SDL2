@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -Wextra -D_REENTRANT $(DEFINES)
-INCPATH       = -I. -I./include/ -I../MLib/include -I/usr/include/qt6 -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/lib64/qt6/mkspecs/linux-g++
+INCPATH       = -I. -Iinclude -I../MLib/include -I/usr/include/qt6 -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/lib64/qt6/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -53,7 +53,7 @@ OBJECTS_DIR   = debug/
 ####### Files
 
 SOURCES       = src/main.cpp \
-		../MLib/src/mmatrix.cpp 
+		src/mmatrix.cpp 
 OBJECTS       = debug/main.o \
 		debug/mmatrix.o
 DIST          = /usr/lib64/qt6/mkspecs/features/spec_pre.prf \
@@ -121,8 +121,8 @@ DIST          = /usr/lib64/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib64/qt6/mkspecs/features/yacc.prf \
 		/usr/lib64/qt6/mkspecs/features/lex.prf \
-		rotating-cube.pro ../MLib/include/mmatrix.hpp src/main.cpp \
-		../MLib/src/mmatrix.cpp
+		rotating-cube.pro include/mmatrix.hpp src/main.cpp \
+		src/mmatrix.cpp
 QMAKE_TARGET  = rotating-cube
 DESTDIR       = 
 TARGET        = rotating-cube
@@ -286,8 +286,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../MLib/include/mmatrix.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp ../MLib/src/mmatrix.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents include/mmatrix.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/mmatrix.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -335,11 +335,11 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-debug/main.o: src/main.cpp ../MLib/include/mmatrix.hpp
+debug/main.o: src/main.cpp include/mmatrix.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/main.o src/main.cpp
 
-debug/mmatrix.o: ../MLib/src/mmatrix.cpp ../MLib/include/mmatrix.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/mmatrix.o ../MLib/src/mmatrix.cpp
+debug/mmatrix.o: src/mmatrix.cpp include/mmatrix.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/mmatrix.o src/mmatrix.cpp
 
 ####### Install
 
