@@ -4,23 +4,6 @@
 #define WIDTH 640
 #define HEIGHT 640
 
-#define SCALEFACTOR 5
-
-void printMatrix( MMatrix * p_matrix ) {
-
-    printf( "Matrix %p:\n", p_matrix );
-
-    for ( int i = 0; i < p_matrix->countFields(); i++ ) {
-        printf( "%f, ", p_matrix->getValue( i ) );
-
-        // Line break for new row
-        if ( (i + 1) % p_matrix->countCols() == 0 ) printf( "\n" ); 
-    }
-
-    printf( "\n" );
-
-}
-
 int main() {
 	
 	SDL_Window * window = 0L;
@@ -30,16 +13,12 @@ int main() {
 	SDL_Init( SDL_INIT_EVERYTHING );
 	SDL_CreateWindowAndRenderer( WIDTH, HEIGHT, 0, &window, &renderer );
 
-	bool running = true;
 
 	SDL_SetRenderDrawColor( renderer, 55, 55, 55, 255 );
 	SDL_RenderClear( renderer );
-		
-	// Declaration of rotation and projection matrices
-	float angle = 0;	
 
+    // Declaration of starting points
 	float length = 0.5;
-
 	float points[8][3] = {
 		{ -length, -length, -length },
 		{ length, -length, -length },
@@ -51,12 +30,16 @@ int main() {
 		{ length, length, length }
 	};
 
+	float angle = 0;	
+	bool running = true;
 
 	while ( running == true ) {
 
+        // Draw Background
 		SDL_SetRenderDrawColor( renderer, 55, 55, 55, 255 );
 		SDL_RenderClear( renderer );
 
+        // Rotation matrices
 		float rotationX[9] = {
 			1, 0, 0,
 			0, cos( angle ), -sin( angle ),
@@ -85,7 +68,6 @@ int main() {
 			if ( e.type == SDL_QUIT ) running = false;
 		}		
 
-		SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
 
 		SDL_Point points_array[8];
 
@@ -100,10 +82,11 @@ int main() {
 			MMatrix rotatedZ = m_rotation_z.mult( &rotatedY );
 
             // Projection
-            float distance = 1.5;
+            float distance = sin( angle ) + 2;
             float z = 1 / (distance - rotatedZ.getValue( 2 ) );
 
-            // z = 1 for ortogonal projection
+            // for ortogonal projection
+            // float z = 1;
 
             float projection[6] = {
                 z, 0, 0,
@@ -115,7 +98,7 @@ int main() {
 		    MMatrix projected = m_projection.mult( &rotatedZ );
 
             // Scale point up
-            projected.mult( 500 );
+            projected.mult( 800 );
 
 			float x = projected.getValue( 0, 0 ) * 0.2 + WIDTH / 2;
 			float y = projected.getValue( 0, 1 ) * 0.2 + HEIGHT / 2;
@@ -125,7 +108,8 @@ int main() {
 
 		}
 
-		// Drawing Lines ( like every healthy person does )
+		// Drawing Lines ( like every healthy person should )
+		SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
 		for ( int i = 0; i < 4; i++ ) {
 			SDL_RenderDrawLine( renderer, points_array[i].x, points_array[i].y, points_array[i + 4].x, points_array[i + 4].y );
 		}
@@ -141,8 +125,6 @@ int main() {
 		SDL_RenderDrawLine( renderer, points_array[5].x, points_array[5].y, points_array[7].x, points_array[7].y );
 
 		angle += 0.01;
-
-        printf( "angle = %f\n", angle );
 
 		SDL_RenderPresent( renderer );
 
