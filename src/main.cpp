@@ -13,6 +13,7 @@ int main() {
 	SDL_Init( SDL_INIT_EVERYTHING );
 	SDL_CreateWindowAndRenderer( WIDTH, HEIGHT, 0, &window, &renderer );
 
+    SDL_SetWindowTitle( window, "Rotating Cube" );
 
 	SDL_SetRenderDrawColor( renderer, 55, 55, 55, 255 );
 	SDL_RenderClear( renderer );
@@ -114,6 +115,7 @@ int main() {
 			SDL_RenderDrawLine( renderer, points_array[i].x, points_array[i].y, points_array[i + 4].x, points_array[i + 4].y );
 		}
 
+        // Could use some refactoring
 		SDL_RenderDrawLine( renderer, points_array[0].x, points_array[0].y, points_array[1].x, points_array[1].y );
 		SDL_RenderDrawLine( renderer, points_array[0].x, points_array[0].y, points_array[2].x, points_array[2].y );
 		SDL_RenderDrawLine( renderer, points_array[2].x, points_array[2].y, points_array[3].x, points_array[3].y );
