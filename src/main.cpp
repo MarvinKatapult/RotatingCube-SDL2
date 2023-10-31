@@ -15,9 +15,6 @@ int main() {
 
     SDL_SetWindowTitle( window, "Rotating Cube" );
 
-	SDL_SetRenderDrawColor( renderer, 55, 55, 55, 255 );
-	SDL_RenderClear( renderer );
-
     // Declaration of starting points
 	float length = 0.5;
 	float points[8][3] = {
@@ -37,7 +34,7 @@ int main() {
 	while ( running == true ) {
 
         // Draw Background
-		SDL_SetRenderDrawColor( renderer, 55, 55, 55, 255 );
+		SDL_SetRenderDrawColor( renderer, 25, 25, 25, 255 );
 		SDL_RenderClear( renderer );
 
         // Rotation matrices
@@ -110,7 +107,7 @@ int main() {
 		}
 
 		// Drawing Lines ( like every healthy person should )
-		SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
+		SDL_SetRenderDrawColor( renderer, 0, 255, 0, 255 );
 		for ( int i = 0; i < 4; i++ ) {
 			SDL_RenderDrawLine( renderer, points_array[i].x, points_array[i].y, points_array[i + 4].x, points_array[i + 4].y );
 		}

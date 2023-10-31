@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -Wextra -D_REENTRANT $(DEFINES)
-INCPATH       = -I. -Iinclude -I../MLib/include -I/usr/include/qt6 -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/lib64/qt6/mkspecs/linux-g++
+INCPATH       = -I. -Iinclude -I/home/ibma/dev/MLib/include/ -I/usr/include/qt6 -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/lib64/qt6/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = rotating-cube1.0.0
-DISTDIR = /home/ibma/dev/RotatingCube-SDL2/debug/rotating-cube1.0.0
+DISTDIR = /home/ibma/Dev/RotatingCube-SDL2/debug/rotating-cube1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath-link,/usr/lib64
 LIBS          = $(SUBLIBS) -L/usr/local/lib -lSDL2 /usr/lib64/libQt6Gui.so /usr/lib64/libQt6Core.so -lpthread -lGLX -lOpenGL   
@@ -102,7 +102,6 @@ DIST          = /usr/lib64/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt6/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt6/mkspecs/linux-g++/qmake.conf \
 		/usr/lib64/qt6/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib64/qt6/mkspecs/features/exclusive_builds.prf \
 		/usr/lib64/qt6/mkspecs/features/toolchain.prf \
 		/usr/lib64/qt6/mkspecs/features/default_pre.prf \
@@ -180,7 +179,6 @@ Makefile: rotating-cube.pro /usr/lib64/qt6/mkspecs/linux-g++/qmake.conf /usr/lib
 		/usr/lib64/qt6/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt6/mkspecs/linux-g++/qmake.conf \
 		/usr/lib64/qt6/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib64/qt6/mkspecs/features/exclusive_builds.prf \
 		/usr/lib64/qt6/mkspecs/features/toolchain.prf \
 		/usr/lib64/qt6/mkspecs/features/default_pre.prf \
@@ -249,7 +247,6 @@ Makefile: rotating-cube.pro /usr/lib64/qt6/mkspecs/linux-g++/qmake.conf /usr/lib
 /usr/lib64/qt6/mkspecs/features/qt_config.prf:
 /usr/lib64/qt6/mkspecs/linux-g++/qmake.conf:
 /usr/lib64/qt6/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib64/qt6/mkspecs/features/exclusive_builds.prf:
 /usr/lib64/qt6/mkspecs/features/toolchain.prf:
 /usr/lib64/qt6/mkspecs/features/default_pre.prf:
