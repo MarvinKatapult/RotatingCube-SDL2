@@ -3,31 +3,6 @@
 
 class MMatrix {
 
-	/*
-	 *
-	 * Guten Konstruktor
-	 * Kein Delete vom User der Klasse
-	 * Nimm einfach float array
-	 * Definiere Rows and Columsn anzahl
-	 *
-	 * Methoden:
-	 * Constructor( float * layout, int rows, int cols );
-	 * Constructor( int rows, int cols );
-	 *
-	 * Kreuzprodukt
-	 * Skalarmultiplikation
-	 * SetRow( float * row, int row );
-	 * 
-	 * getValue( int position );
-	 * getValue( int x, int y );
-	 *
-	 * setValue( float value, int position );
-	 * setValue( float value, int x, int y );
-	 *
-	 * countRows
-	 * countCols
-	 */
-
 	public:
 
 	   /**
