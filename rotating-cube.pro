@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-INCLUDEPATH += ./include/ /home/ibma/dev/MLib/include/
+INCLUDEPATH += ./include/ 
 LIBS += -L/usr/local/lib -lSDL2 
 
 # Input

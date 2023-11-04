@@ -98,7 +98,7 @@ int main() {
             // Scale point up
             projected.mult( 800 );
 
-			float x = projected.getValue( 0, 0 ) * 0.2 + WIDTH / 2;
+			float x = projected.getValue( 0, 0 ) * 0.2 + WIDTH / 2 + sin( angle * 0.5 ) * 100;
 			float y = projected.getValue( 0, 1 ) * 0.2 + HEIGHT / 2;
 
 			SDL_Point point = { (int)x, (int)y };
