@@ -107,7 +107,7 @@ int main() {
 		}
 
 		// Drawing Lines ( like every healthy person should )
-		SDL_SetRenderDrawColor( renderer, 0, 255, 0, 255 );
+		SDL_SetRenderDrawColor( renderer, 255, 0, 255, 255 );
 		for ( int i = 0; i < 4; i++ ) {
 			SDL_RenderDrawLine( renderer, points_array[i].x, points_array[i].y, points_array[i + 4].x, points_array[i + 4].y );
 		}
