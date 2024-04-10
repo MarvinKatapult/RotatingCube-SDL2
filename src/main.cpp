@@ -84,7 +84,7 @@ int main() {
             float z = 1 / (distance - rotatedZ.getValue( 2 ) );
 
             // for ortogonal projection
-            // float z = 1;
+            z = 1;
 
             float projection[6] = {
                 z, 0, 0,

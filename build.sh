@@ -1,5 +1,5 @@
 
-project="RotatingCube-SDL2"
+project="rotating_cube"
 
 red_echo() {
     local text=$1
